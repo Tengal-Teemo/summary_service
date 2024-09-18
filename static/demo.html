@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Summarize demo</title>
+</head>
+<body>
+    <h1>Test the summarizer</h1>
+    <form action="http://localhost:5000/summarize" method="post" enctype="multipart/form-data" target="_blank">
+        <label for="earlier">Earlier file:</label>
+        <input type="file" id="fileEarlier" name="earlier"><br><br>
+        <label for="later">Later file:</label>
+        <input type="file" id="fileLater" name="later"><br><br>
+        <input type="submit" value="Submit">
+        <label for="role">Role</label>
+        <input type="text" id="role" name="role"><br><br>
+    </form>
+</body>
+</html>
