@@ -20,12 +20,12 @@ def handle_upload():  # put application's code here
     if 'later' not in request.files:
         return 'No \"later\" File Part', 400
 
-    if 'role' not in request.form:
+    if 'roles' not in request.form:
         return 'No role provided', 400
 
     earlier = request.files.getlist('earlier')
     later = request.files.getlist('later')
-    role = request.form['role']
+    roles = request.form.getlist('roles')
 
     if len(earlier) != len(later):
         return 'Mismatched numbers of earlier and later files', 400
@@ -37,9 +37,9 @@ def handle_upload():  # put application's code here
         later_file.save(os.path.join(UPLOAD_FOLDER, later_file.filename))
 
         # Handle Ashley's stuff
-        persona = persona_from_role(role)
-        role_summaries, prompt_tokens, response_tokens = summary_from_files(os.path.join(UPLOAD_FOLDER, earlier_file.filename), os.path.join(UPLOAD_FOLDER, later_file.filename), {role: persona})
-        all_summaries.update({later_file.filename: role_summaries[role]})
+        personas = {role: persona_from_role(role) for role in roles}
+        role_summaries, prompt_tokens, response_tokens = summary_from_files(os.path.join(UPLOAD_FOLDER, earlier_file.filename), os.path.join(UPLOAD_FOLDER, later_file.filename), personas)
+        all_summaries.update({later_file.filename: role_summaries})
 
     return jsonify({"summaries": all_summaries})
 
