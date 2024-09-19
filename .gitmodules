@@ -1,0 +1,3 @@
+[submodule "text_extractor"]
+	path = text_extractor
+	url = https://github.com/Tengal-Teemo/text_extractor.git
