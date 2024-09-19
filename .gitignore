@@ -1,3 +1,7 @@
 .env
 .idea
 .venv
+test_files/
+uploads/
+!test_files/README.md
+__pycache__/*
